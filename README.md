@@ -65,3 +65,4 @@ This repository contains the following components:
 #### 8.  Deletion
      a. Run the below command in Terraform to destroy the entire infrastructure
         terraform destroy --auto-approve
+# Javaproject
