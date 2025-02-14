@@ -25,7 +25,7 @@ pipeline {
             steps {
                 dir ("DevopsProject1"){
                   script {
-                    git branch: 'main', url: '' 
+                    git branch: 'main', url: 'https://github.com/Nidhyapandian/Javaproject.git' 
                   }
                 }
             }
