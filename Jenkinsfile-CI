@@ -23,7 +23,7 @@ pipeline {
             // use pipeline syntax generator to generate below step
             // 'Pipeline syntax' --> Steps 'Smaple step' --> git (enter url & branch & generate)
             steps {
-                dir ("DevopsProject1"){
+                dir ("Javaproject"){
                   script {
                     git branch: 'main', url: 'https://github.com/Nidhyapandian/Javaproject.git' 
                   }
