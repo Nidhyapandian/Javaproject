@@ -57,7 +57,7 @@ resource "aws_instance" "my_ec2_instance1" {
   ami                    = "ami-0cf10cdf9fcd62d37"
   instance_type          = "t2.medium"
   vpc_security_group_ids = [aws_security_group.my_security_group1.id]
-  key_name               = "My_Key" # paste your key-name here, do not use extension '.pem'
+  key_name               = "TestKey" # paste your key-name here, do not use extension '.pem'
 
   # Consider EBS volume 30GB
   root_block_device {
@@ -84,7 +84,7 @@ resource "aws_instance" "my_ec2_instance1" {
     # ESTABLISHING SSH CONNECTION WITH EC2
     connection {
       type        = "ssh"
-      private_key = file("./My_Key.pem") # replace with your key-name 
+      private_key = file("Testkey.pem") # replace with your key-name 
       user        = "ec2-user"
       host        = self.public_ip
     }
@@ -97,12 +97,13 @@ resource "aws_instance" "my_ec2_instance1" {
       
       # Install Jenkins 
       # REF: https://www.jenkins.io/doc/tutorials/tutorial-for-installing-jenkins-on-AWS/
-      "sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo",
+      "sudo wget -O /etc/yum.repos.d/jenkins.repo \https://pkg.jenkins.io/redhat-stable/jenkins.repo",
       "sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key",
-      "sudo yum install java-17-amazon-corretto -y",
-      "sudo yum install jenkins -y",
-      "sudo systemctl enable jenkins",
-      "sudo systemctl start jenkins",
+      "sudo yum upgrade",
+      # Add required dependencies for the jenkins package
+      "sudo yum install fontconfig java-17-openjdk",
+      "sudo yum install jenkins",
+      "sudo systemctl daemon-reload",
 
       # Install Docker
       # REF: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-docker.html
